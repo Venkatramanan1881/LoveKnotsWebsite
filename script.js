@@ -61,164 +61,150 @@ menuLinks.forEach(link => {
   });
 });
 
-/* SVG Liquid/Water Slider Effect */
-const servicesSlider = document.getElementById('services');
-const sliderContainer = document.getElementById('slider-container');
-const displacementMap = document.getElementById('displacement-map');
-const slides = document.querySelectorAll('.slide');
-
-let targetScale = 0;
-let currentScale = 0;
-
-function updateFilter() {
-  currentScale += (targetScale - currentScale) * 0.1;
-  if(displacementMap) {
-    displacementMap.setAttribute('scale', currentScale);
-  }
-  targetScale *= 0.85; // Decay
-  requestAnimationFrame(updateFilter);
-}
-updateFilter();
-
-// Use Intersection Observer for active slide and glitch
-const slideObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      
-      // Trigger glitch effect ONLY on desktop size
-      if (window.innerWidth > 1024) {
-        entry.target.classList.add('glitch-anim');
-        if (displacementMap) {
-          targetScale = 350;
-          const turbulence = document.querySelector('feTurbulence');
-          if (turbulence) {
-            turbulence.setAttribute('baseFrequency', '0.05 0.08');
-            setTimeout(() => turbulence.setAttribute('baseFrequency', '0.015'), 800);
-          }
-        }
-        setTimeout(() => {
-            entry.target.classList.remove('glitch-anim');
-        }, 800);
-      }
-    } else {
-      entry.target.classList.remove('active');
-      entry.target.classList.remove('glitch-anim');
-    }
+function scrollToSlide(index) {
+  const servicesSlider = document.getElementById('services');
+  const slides = document.querySelectorAll('.slide');
+  if (!servicesSlider || index < 0 || index >= slides.length) return;
+  
+  const rect = servicesSlider.getBoundingClientRect();
+  const startY = window.scrollY + rect.top;
+  const height = servicesSlider.offsetHeight;
+  const windowHeight = window.innerHeight;
+  const maxScroll = height - windowHeight;
+  
+  const targetProgress = index / (slides.length - 1);
+  const targetY = startY + (targetProgress * maxScroll);
+  
+  window.scrollTo({
+    top: targetY,
+    behavior: 'smooth'
   });
-}, { threshold: 0.5 }); // Trigger when 50% visible
-
-if (slides.length > 0) {
-    slides.forEach(slide => slideObserver.observe(slide));
 }
 
 const nextBtn = document.getElementById('next-slide');
 const prevBtn = document.getElementById('prev-slide');
 
-function scrollToSlide(index) {
-  if (index < 0 || index >= slides.length) return;
-  if(sliderContainer && slides[index]) {
-       sliderContainer.scrollTo({
-           left: slides[index].offsetLeft,
-           behavior: 'smooth'
-       });
-  }
-}
-
 if(nextBtn) {
     nextBtn.addEventListener('click', () => {
-        if (!sliderContainer || !slides.length) return;
-        const currentScroll = sliderContainer.scrollLeft;
-        const slideWidth = slides[0].offsetWidth;
-        const nextIndex = Math.min(slides.length - 1, Math.floor(currentScroll / slideWidth) + 1);
-        scrollToSlide(nextIndex);
+        const servicesSlider = document.getElementById('services');
+        const slides = document.querySelectorAll('.slide');
+        if (!servicesSlider || !slides.length) return;
+        const rect = servicesSlider.getBoundingClientRect();
+        const maxScroll = rect.height - window.innerHeight;
+        let progress = Math.max(0, Math.min(1, -rect.top / maxScroll));
+        let currentIndex = Math.round(progress * (slides.length - 1));
+        scrollToSlide(currentIndex + 1);
     });
 }
 
 if(prevBtn) {
     prevBtn.addEventListener('click', () => {
-        if (!sliderContainer || !slides.length) return;
-        const currentScroll = sliderContainer.scrollLeft;
-        const slideWidth = slides[0].offsetWidth;
-        const prevIndex = Math.max(0, Math.ceil(currentScroll / slideWidth) - 1);
-        scrollToSlide(prevIndex);
+        const servicesSlider = document.getElementById('services');
+        const slides = document.querySelectorAll('.slide');
+        if (!servicesSlider || !slides.length) return;
+        const rect = servicesSlider.getBoundingClientRect();
+        const maxScroll = rect.height - window.innerHeight;
+        let progress = Math.max(0, Math.min(1, -rect.top / maxScroll));
+        let currentIndex = Math.round(progress * (slides.length - 1));
+        scrollToSlide(currentIndex - 1);
     });
 }
 
-// Vertical Wheel to Horizontal Scroll Logic
-function setupHorizontalWheelSlide(element, slideSelector) {
-  if (!element) return;
-  
-  let isAnimating = false;
-  let wheelAccumulator = 0;
-  let resetTimeout;
-  
-  element.addEventListener('wheel', (e) => {
-    const maxScrollLeft = Math.round(element.scrollWidth - element.clientWidth);
-    
-    // Allow default vertical scroll if at the extreme boundaries
-    if (e.deltaY > 0 && Math.ceil(element.scrollLeft) >= maxScrollLeft - 10) return;
-    if (e.deltaY < 0 && Math.floor(element.scrollLeft) <= 10) return;
+// ------------------- NATIVE STICKY MAPPER -------------------
+function initStickyScroll(sectionId, containerSelector) {
+    const section = document.getElementById(sectionId);
+    const container = section ? section.querySelector(containerSelector) : null;
+    if (!section || !container) return;
 
-    if (e.deltaY !== 0 && !e.shiftKey) {
-      e.preventDefault();
-      
-      if (isAnimating) return;
-      
-      wheelAccumulator += e.deltaY;
-      
-      clearTimeout(resetTimeout);
-      resetTimeout = setTimeout(() => {
-          wheelAccumulator = 0;
-      }, 300);
-      
-      if (Math.abs(wheelAccumulator) > 40) {
-        const slides = Array.from(element.querySelectorAll(slideSelector));
-        if(!slides.length) return;
+    window.addEventListener('scroll', () => {
+        const rect = section.getBoundingClientRect();
+        const top = rect.top;
+        const height = rect.height;
+        const windowHeight = window.innerHeight;
         
-        let closestIndex = 0;
-        let minDiff = Infinity;
-        slides.forEach((s, idx) => {
-          const diff = Math.abs(element.scrollLeft - s.offsetLeft);
-          if (diff < minDiff) {
-              minDiff = diff;
-              closestIndex = idx;
-          }
-        });
+        const maxScroll = height - windowHeight;
+        let progress = 0;
         
-        let targetIndex = closestIndex;
-        if (wheelAccumulator > 0) {
-          targetIndex = Math.min(slides.length - 1, closestIndex + 1);
+        if (top > 0) {
+            progress = 0;
+        } else if (-top > maxScroll) {
+            progress = 1;
         } else {
-          targetIndex = Math.max(0, closestIndex - 1);
+            progress = -top / maxScroll;
         }
         
-        if (targetIndex !== closestIndex || element.scrollLeft !== slides[targetIndex].offsetLeft) {
-            isAnimating = true;
-            wheelAccumulator = 0;
-            
-            // disable snap during programmatic scroll
-            element.style.scrollSnapType = 'none';
-            element.scrollTo({
-              left: slides[targetIndex].offsetLeft,
-              behavior: 'smooth'
-            });
-            
-            setTimeout(() => {
-              isAnimating = false;
-              element.style.scrollSnapType = '';
-            }, 500);
-        } else {
-            // Already there
-            wheelAccumulator = 0;
+        const maxTranslate = container.scrollWidth - window.innerWidth;
+        if (sectionId === 'services') {
+            const slides = section.querySelectorAll('.slide');
+            if (slides.length > 0) {
+                let newIndex = Math.min(slides.length - 1, Math.floor(progress * slides.length));
+                
+                // Set initial dataset safely
+                if (container.dataset.currentIndex === undefined) container.dataset.currentIndex = 0;
+                
+                if (container.dataset.currentIndex != newIndex) {
+                    const oldIndex = parseInt(container.dataset.currentIndex);
+                    container.dataset.currentIndex = newIndex;
+                    
+                    if(slides[oldIndex]) slides[oldIndex].classList.remove('active');
+                    if(slides[newIndex]) slides[newIndex].classList.add('active');
+                }
+            }
+        } else if (maxTranslate > 0) {
+            // Apply a slight offset compensation inside the client-scroll
+            const isClient = container.classList.contains('client-scroll');
+            const visualTranslate = progress * maxTranslate;
+            container.style.transform = `translateX(-${visualTranslate}px)`;
         }
-      }
-    }
-  }, { passive: false });
+    }, { passive: true });
 }
 
-setupHorizontalWheelSlide(document.getElementById('slider-container'), '.slide');
-setupHorizontalWheelSlide(document.querySelector('.client-scroll'), '.client-card');
+initStickyScroll('services', '.slider-container');
+initStickyScroll('works', '.client-scroll');
+
+// Desktop 1-Tick Scroll Hijacker strictly for Oblo logic
+let wheelThrottle = false;
+window.addEventListener('wheel', (e) => {
+    const servicesSlider = document.getElementById('services');
+    if (!servicesSlider) return;
+    
+    const rect = servicesSlider.getBoundingClientRect();
+    const isInsideServices = rect.top <= 10 && rect.bottom >= window.innerHeight - 10;
+    
+    // Throttle block
+    if (wheelThrottle && isInsideServices) {
+       e.preventDefault();
+       return;
+    }
+    
+    if (isInsideServices && !e.shiftKey) {
+        const slides = servicesSlider.querySelectorAll('.slide');
+        const maxScroll = servicesSlider.clientHeight - window.innerHeight;
+        const segmentSize = maxScroll / (slides.length - 1);
+        
+        const offsetTop = window.scrollY + rect.top;
+        const currentLocalY = window.scrollY - offsetTop; 
+        
+        let currentIndex = Math.round(currentLocalY / segmentSize);
+        
+        // Escape boundaries cleanly
+        if (currentIndex === slides.length - 1 && e.deltaY > 0) return; // Go out naturally down
+        if (currentIndex === 0 && e.deltaY < 0) return; // Go out naturally up
+        
+        e.preventDefault(); // Lock scroll!
+        wheelThrottle = true;
+        
+        if (e.deltaY > 0) currentIndex++;
+        else currentIndex--;
+        
+        currentIndex = Math.max(0, Math.min(slides.length - 1, currentIndex));
+        const targetY = offsetTop + (currentIndex * segmentSize);
+        
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        
+        setTimeout(() => { wheelThrottle = false; }, 1200);
+    }
+}, { passive: false });
 
 // Intersection Observer for Timeline animations
 const observerOptions = {
@@ -263,19 +249,12 @@ window.addEventListener('scroll', () => {
   timelineProgress.style.height = scrollPercentage + '%';
 }, {passive: true});
 
-// ------------------- HORIZONTAL DRAG GALLERY FOR DESKTOP MICE -------------------
+// Custom Cursor logic only, dragging removed
 const clientScroll = document.querySelector('.client-scroll');
-
 if (clientScroll) {
-  // Fix for broken dragging: completely neutralize browser native drag actions on all images and links
-  clientScroll.querySelectorAll('a, img').forEach(el => {
-    el.addEventListener('dragstart', (e) => e.preventDefault());
-  });
-
-  // Custom Cursor Logic
   const dragCursor = document.createElement('div');
   dragCursor.classList.add('drag-cursor');
-  dragCursor.innerHTML = '&lt; Drag &gt;';
+  dragCursor.innerHTML = 'Scroll'; // Text changed as it's scroll now, not drag
   document.body.appendChild(dragCursor);
 
   clientScroll.addEventListener('mouseenter', () => {
@@ -283,59 +262,13 @@ if (clientScroll) {
     dragCursor.style.transform = 'translate(-50%, -50%) scale(1)';
   });
 
-  // Ensure cursor follows smoothly
   clientScroll.addEventListener('mousemove', (e) => {
     dragCursor.style.left = e.clientX + 'px';
     dragCursor.style.top = e.clientY + 'px';
   });
 
-  let isDown = false;
-  let isDragging = false;
-  let startX;
-  let scrollLeft;
-
-  clientScroll.addEventListener('mousedown', (e) => {
-    isDown = true;
-    isDragging = false; // Reset drag state on fresh click
-    clientScroll.classList.add('active');
-    dragCursor.classList.add('grabbing'); // visual feedback
-    startX = e.pageX - clientScroll.offsetLeft;
-    scrollLeft = clientScroll.scrollLeft;
-  });
-
   clientScroll.addEventListener('mouseleave', () => {
-    isDown = false;
-    clientScroll.classList.remove('active');
-    dragCursor.classList.remove('grabbing');
-    dragCursor.style.opacity = '0'; // hide custom cursor
+    dragCursor.style.opacity = '0';
     dragCursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
-  });
-
-  clientScroll.addEventListener('mouseup', () => {
-    isDown = false;
-    clientScroll.classList.remove('active');
-    dragCursor.classList.remove('grabbing');
-  });
-
-  clientScroll.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault(); 
-    const x = e.pageX - clientScroll.offsetLeft;
-    const walk = (x - startX) * 1.5; 
-    
-    // Only flag as a drag if the mouse moved more than a couple pixels
-    if (Math.abs(walk) > 5) {
-      isDragging = true;
-    }
-    
-    clientScroll.scrollLeft = scrollLeft - walk;
-  });
-
-  clientScroll.addEventListener('click', (e) => {
-    // If the user was dragging, stop the link from functioning!
-    if (isDragging) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
   });
 }

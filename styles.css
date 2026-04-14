@@ -216,48 +216,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu-link:hover { color: var(--color-accent); }
 
-/* ------------------- SLIDER (OBLO STYLE) ------------------- */
-.svg-filter { position: absolute; pointer-events: none; width: 0; height: 0; }
+/* ------------------- SLIDER (PREMIUM CUT) ------------------- */
 
 .services-slider {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 1200vh; /* 12 slides * 100vh */
   background: #000;
 }
 
 .slider-sticky {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 .slider-container {
   position: relative;
-  display: flex;
-  flex-direction: row;
   width: 100%;
   height: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.slider-container::-webkit-scrollbar {
-  display: none;
 }
 
 .slide {
-  position: relative;
-  flex: 0 0 100vw;
-  width: 100vw;
-  height: 100vh;
-  opacity: 1; /* Make visible natively inside flex */
-  visibility: visible;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              visibility 1.2s, 
+              transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 1;
-  scroll-snap-align: start;
 }
+
 .slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
   z-index: 2;
 }
 
@@ -556,22 +555,39 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-.clients { padding: 100px 0; background: #111; text-align: center; }
-.works-header { padding: 0 5%; margin-bottom: 60px; }
+.clients { 
+  height: 400vh; /* 6 items * roughly ~66vh mapping */
+  background: #111; 
+  padding: 0; 
+}
+.clients-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.works-header { 
+  width: 100%;
+  padding: 0 5%; 
+  margin: 0 0 40px 0; /* Padding between texts and images */
+  text-align: center; 
+  z-index: 10;
+}
+.works-header .section-subtitle { margin-bottom: 0; }
 
 /* Horizontal Scrolling Layout */
 .client-scroll { 
   display: flex; 
   flex-direction: row;
-  overflow-x: auto;
+  width: max-content;
   gap: 40px; 
-  scroll-snap-type: x mandatory; 
-  -webkit-overflow-scrolling: touch; 
-  scrollbar-width: none;
-  cursor: none; /* Hide default mouse when dragging to show custom cursor! */
+  padding: 0 5vw;
+  will-change: transform;
 }
-.client-scroll.active { scroll-snap-type: none; }
-.client-scroll::-webkit-scrollbar { display: none; }
 .client-scroll a { cursor: none; }
 
 /* Custom Drag Cursor Follower */
@@ -602,7 +618,7 @@ h1, h2, h3, h4, h5, h6 {
   flex: 0 0 auto;
   width: 80vw; /* Massive desktop and mobile sizing */
   max-width: 1000px;
-  height: 70vh; 
+  height: 65vh; /* Sized perfectly to fit below the texts in 100vh block */
   border-radius: 6px; 
   overflow: hidden; 
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
@@ -649,6 +665,10 @@ h1, h2, h3, h4, h5, h6 {
     right: auto;
     transform: translateX(-50%);
   }
+  
+  /* Mobile Scaling to fix Text Overlaps */
+  .section-title { font-size: 2.2rem; margin-bottom: 10px; }
+  .works-header { margin-bottom: 25px; }
   .client-scroll { gap: 20px; padding: 20px 5vw; }
-  .client-card { width: 90vw; height: 60vh; }
+  .client-card { width: 90vw; height: 55vh; }
 }

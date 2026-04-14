@@ -42,13 +42,7 @@
   </div>
 </div>
 
-<!-- SVG FILTER FOR LIQUID/WATER SCROLL EFFECT -->
-<svg class="svg-filter" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
-  <filter id="liquid-glitch">
-    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" />
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="B" id="displacement-map" />
-  </filter>
-</svg>
+
 
 <!-- MENU HEADER -->
 <header class="site-header">
@@ -283,10 +277,11 @@
 
   <!-- WORKS -->
   <section class="clients" id="works">
-    <div class="works-header">
-      <h2 class="section-title" style="margin-bottom: 20px;">Other Noticeable Works</h2>
-      <p class="section-subtitle">Scroll to explore a stunning celebration of eternal love.</p>
-    </div>
+    <div class="clients-sticky">
+      <div class="works-header">
+        <h2 class="section-title" style="margin-bottom: 20px;">Other Noticeable Works</h2>
+        <p class="section-subtitle">Scroll to explore a stunning celebration of eternal love.</p>
+      </div>
     
     <div class="client-scroll">
       <div class="client-card"><a href="portfolio.html"><img src="images/Reshma%20-%20Martin%20-01.png" alt="Reshma and Martin"></a></div>
@@ -295,6 +290,7 @@
       <div class="client-card"><a href="portfolio.html"><img src="images/Reshma%20-%20Martin%20-04.png" alt="Reshma and Martin"></a></div>
       <div class="client-card"><a href="portfolio.html"><img src="images/Reshma%20-%20Martin%20-05.png" alt="Reshma and Martin"></a></div>
       <div class="client-card"><a href="portfolio.html"><img src="images/Reshma%20-%20Martin%20-06.png" alt="Reshma and Martin"></a></div>
+    </div>
     </div>
   </section>
 

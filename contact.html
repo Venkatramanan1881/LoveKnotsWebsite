@@ -10,51 +10,67 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     body { background: #111; overflow-x: hidden; color: #fff; margin: 0; padding: 0; }
-    .contact-layout {
-      width: 100vw; min-height: 100vh;
-      display: flex; flex-wrap: wrap;
+    
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 5vw 80px; /* 120px top padding keeps everything below the logo! */
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
     }
-    .contact-map {
-      flex: 1 1 50%;
-      min-height: 50vh;
-      position: relative;
+
+    .contact-header {
+      text-align: center;
     }
-    .contact-map iframe {
-      width: 100%; height: 100%; min-height: 50vh;
-      border: none;
-      filter: grayscale(100%) invert(90%) contrast(1.2) opacity(0.85); /* Dark cinematic map effect matching dark mode */
-    }
-    .contact-info-panel {
-      flex: 1 1 50%;
-      padding: 120px 5vw 80px;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .contact-info-panel h1 {
+    .contact-header h1 {
       font-family: var(--font-main);
       font-size: clamp(3rem, 5vw, 4.5rem);
       color: #fff;
-      margin-top: 0; margin-bottom: 20px;
+      margin-top: 0; margin-bottom: 30px;
     }
+    
     .contact-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
       font-family: var(--font-body);
       font-size: 1.05rem;
       color: #ccc;
       line-height: 1.8;
-      margin-bottom: 40px;
+      text-align: center;
     }
-    .contact-details p { margin: 10px 0; }
+    .contact-details p { margin: 0; }
     .contact-details strong { color: var(--color-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;}
+
+    .contact-map {
+      width: 100%;
+      height: 45vh;
+      min-height: 350px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .contact-map iframe {
+      width: 100%; height: 100%;
+      border: none;
+      filter: grayscale(100%) invert(90%) contrast(1.2) opacity(0.85);
+    }
     
-    /* Dedicated contact form */
-    .c-form { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 500px; }
+    .c-form { 
+      display: flex; flex-direction: column; gap: 20px; 
+      width: 100%; max-width: 600px; 
+      margin: 0 auto; 
+    }
     .c-form input, .c-form textarea {
       width: 100%; padding: 15px 20px;
-      background: transparent; border: 1px solid #333; border-radius: 4px;
+      background: rgba(255,255,255,0.02); border: 1px solid #333; border-radius: 4px;
       color: #fff; font-family: var(--font-body); resize: vertical;
       transition: border-color 0.3s;
       box-sizing: border-box;
     }
-    .c-form input:focus, .c-form textarea:focus { outline: none; border-color: var(--color-accent); }
+    .c-form input:focus, .c-form textarea:focus { outline: none; border-color: var(--color-accent); background: transparent; }
     .c-form button {
       padding: 15px; background: var(--color-accent);
       color: #fff; font-family: var(--font-body); font-weight: 600;
@@ -91,28 +107,37 @@
   </div>
 </header>
 
-<div class="contact-layout">
+<div class="contact-container">
+
+  <!-- Contact Us Below Header -->
+  <div class="contact-header">
+    <h1>Contact Us</h1>
+    <div class="contact-details">
+      <div>
+        <p><strong>Studio Address</strong><br>Cross-1, 191-C, Bharathi Park Rd,<br>Saibaba Colony, Coimbatore,<br>Tamil Nadu 641011</p>
+      </div>
+      <div>
+        <p><strong>Phones</strong><br>+91 95856 50066</p>
+      </div>
+      <div>
+        <p><strong>Email Address</strong><br>hello@loveknots.in</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Before Contact Form -->
   <div class="contact-map">
     <iframe src="https://maps.google.com/maps?q=191-C,+Bharathi+Park+Rd,+Saibaba+Colony,+Coimbatore,+Tamil+Nadu+641011&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
   </div>
 
-  <div class="contact-info-panel">
-    <h1>Contact Us</h1>
-    <div class="contact-details">
-      <p><strong>Studio Address</strong><br>Cross-1, 191-C, Bharathi Park Rd,<br>Saibaba Colony, Coimbatore,<br>Tamil Nadu 641011</p>
-      <div style="display:flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
-        <p><strong>Phones</strong><br>+91 95856 50066</p>
-        <p><strong>Email Address</strong><br>hello@loveknots.in</p>
-      </div>
-    </div>
+  <!-- Contact Form -->
+  <form class="c-form">
+    <input type="text" placeholder="Name" required />
+    <input type="tel" placeholder="Phone Number" required />
+    <textarea placeholder="Comments" rows="5" required></textarea>
+    <button type="submit">Submit Request</button>
+  </form>
 
-    <form class="c-form">
-      <input type="text" placeholder="Name" required />
-      <input type="tel" placeholder="Phone Number" required />
-      <textarea placeholder="Comments" rows="5" required></textarea>
-      <button type="submit">Submit Request</button>
-    </form>
-  </div>
 </div>
 
 </body>
