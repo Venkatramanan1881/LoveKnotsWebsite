@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | Love Knots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body { background: #111; overflow-x: hidden; color: #fff; margin: 0; padding: 0; }
+    .contact-layout {
+      width: 100vw; min-height: 100vh;
+      display: flex; flex-wrap: wrap;
+    }
+    .contact-map {
+      flex: 1 1 50%;
+      min-height: 50vh;
+      position: relative;
+    }
+    .contact-map iframe {
+      width: 100%; height: 100%; min-height: 50vh;
+      border: none;
+      filter: grayscale(100%) invert(90%) contrast(1.2) opacity(0.85); /* Dark cinematic map effect matching dark mode */
+    }
+    .contact-info-panel {
+      flex: 1 1 50%;
+      padding: 120px 5vw 80px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .contact-info-panel h1 {
+      font-family: var(--font-main);
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      color: #fff;
+      margin-top: 0; margin-bottom: 20px;
+    }
+    .contact-details {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: #ccc;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .contact-details p { margin: 10px 0; }
+    .contact-details strong { color: var(--color-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;}
+    
+    /* Dedicated contact form */
+    .c-form { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 500px; }
+    .c-form input, .c-form textarea {
+      width: 100%; padding: 15px 20px;
+      background: transparent; border: 1px solid #333; border-radius: 4px;
+      color: #fff; font-family: var(--font-body); resize: vertical;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    .c-form input:focus, .c-form textarea:focus { outline: none; border-color: var(--color-accent); }
+    .c-form button {
+      padding: 15px; background: var(--color-accent);
+      color: #fff; font-family: var(--font-body); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      border: none; border-radius: 4px; cursor: pointer;
+      transition: background 0.3s;
+    }
+    .c-form button:hover { background: #fff; color: var(--color-dark); }
+    
+    .back-btn {
+      font-family: var(--font-body); 
+      color: #fff; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      cursor: pointer; 
+      border-bottom: 2px solid transparent; 
+      padding-bottom: 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+    .back-btn:hover {
+      border-bottom: 2px solid var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" style="mix-blend-mode: difference;">
+  <div class="logo"><a href="index.html"><img src="Logo/Love%20knots%20logo.png" alt="Love Knots Logo" style="height: 40px; object-fit: contain; vertical-align: middle;"></a></div>
+  <div class="menu-btn" onclick="window.location.href='index.html'">
+    <div class="back-btn">Back Home</div>
+  </div>
+</header>
+
+<div class="contact-layout">
+  <div class="contact-map">
+    <iframe src="https://maps.google.com/maps?q=191-C,+Bharathi+Park+Rd,+Saibaba+Colony,+Coimbatore,+Tamil+Nadu+641011&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <div class="contact-info-panel">
+    <h1>Contact Us</h1>
+    <div class="contact-details">
+      <p><strong>Studio Address</strong><br>Cross-1, 191-C, Bharathi Park Rd,<br>Saibaba Colony, Coimbatore,<br>Tamil Nadu 641011</p>
+      <div style="display:flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+        <p><strong>Phones</strong><br>+91 95856 50066</p>
+        <p><strong>Email Address</strong><br>hello@loveknots.in</p>
+      </div>
+    </div>
+
+    <form class="c-form">
+      <input type="text" placeholder="Name" required />
+      <input type="tel" placeholder="Phone Number" required />
+      <textarea placeholder="Comments" rows="5" required></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
