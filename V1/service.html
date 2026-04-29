@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Details | Love Knots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="clients-data.js"></script>
+  <style>
+    body { background: #111; overflow-x: hidden; }
+    
+    .service-hero {
+      width: 100vw;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+    .service-hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+      filter: grayscale(30%);
+    }
+    .service-hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 5vw;
+    }
+    .service-title {
+      font-family: var(--font-main);
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      color: #fff;
+      margin: 0;
+      line-height: 1;
+    }
+    .service-subtitle {
+      font-family: var(--font-body);
+      color: var(--color-accent);
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+    }
+
+    .service-info-section {
+      padding: 100px 5vw;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .service-info-section h3 {
+      font-family: var(--font-main);
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 20px;
+    }
+    .service-info-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+    
+    .service-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      text-align: left;
+      margin-top: 50px;
+    }
+    .feature-card {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      border-top: 3px solid var(--color-accent);
+    }
+    .feature-card h4 {
+      font-family: var(--font-main);
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 0 0 15px 0;
+    }
+    .feature-card p {
+      font-size: 1rem;
+      color: #aaa;
+      margin: 0;
+    }
+
+    /* Bento Grid (Matching client-portfolio) */
+    .portfolio-gallery {
+      padding: 0 5vw 100px;
+      background: #111;
+      column-count: 1; /* Mobile default */
+      column-gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .portfolio-gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      break-inside: avoid;
+    }
+    .portfolio-gallery img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    /* Mobile Aspect Ratios (Only 3:4 and 9:16, no square) */
+    .portfolio-gallery img:nth-child(even) { aspect-ratio: 3 / 4; }
+    .portfolio-gallery img:nth-child(odd) { aspect-ratio: 9 / 16; }
+    
+    @media (min-width: 768px) {
+      .portfolio-gallery { column-count: 3; }
+      /* Desktop Aspect Ratios (Square, 3:4, 9:16) */
+      .portfolio-gallery img:nth-child(4n+1) { aspect-ratio: 9 / 16; }
+      .portfolio-gallery img:nth-child(4n+2) { aspect-ratio: 1 / 1; }
+      .portfolio-gallery img:nth-child(4n+3) { aspect-ratio: 3 / 4; }
+      .portfolio-gallery img:nth-child(4n+4) { aspect-ratio: 1 / 1; }
+    }
+
+    /* SPECIFIC BENTO FOR BIRTHDAY */
+    .portfolio-gallery.birthday-bento {
+      column-count: 1;
+    }
+    @media (min-width: 768px) {
+      .portfolio-gallery.birthday-bento {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 280px;
+        column-count: unset;
+        gap: 15px;
+      }
+      .portfolio-gallery.birthday-bento img {
+        margin-bottom: 0;
+        height: 100%;
+        aspect-ratio: unset !important;
+      }
+      /* Vertical and Square focus for Birthday */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; } /* 1:1 Square */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+2) { grid-column: span 1; grid-row: span 2; } /* 1:2 Vertical (approx 9:16) */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+3) { grid-column: span 1; grid-row: span 1; } /* 1:1 Square */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+4) { grid-column: span 1; grid-row: span 1; } /* 1:1 Square */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+5) { grid-column: span 1; grid-row: span 2; } /* 1:2 Vertical */
+      .portfolio-gallery.birthday-bento img:nth-child(6n+6) { grid-column: span 2; grid-row: span 2; } /* 1:1 Square */
+    }
+
+    /* SPECIFIC BENTO FOR BABY SHOWER */
+    .portfolio-gallery.babyshower-bento {
+      column-count: 1;
+    }
+    @media (min-width: 768px) {
+      .portfolio-gallery.babyshower-bento {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 320px;
+        column-count: unset;
+        gap: 20px;
+      }
+      .portfolio-gallery.babyshower-bento img {
+        margin-bottom: 0;
+        height: 100%;
+        aspect-ratio: unset !important;
+      }
+      .portfolio-gallery.babyshower-bento img:nth-child(5n+1) { grid-column: span 1; grid-row: span 2; }
+      .portfolio-gallery.babyshower-bento img:nth-child(5n+2) { grid-column: span 2; grid-row: span 1; }
+      .portfolio-gallery.babyshower-bento img:nth-child(5n+3) { grid-column: span 1; grid-row: span 1; }
+      .portfolio-gallery.babyshower-bento img:nth-child(5n+4) { grid-column: span 1; grid-row: span 1; }
+      .portfolio-gallery.babyshower-bento img:nth-child(5n+5) { grid-column: span 2; grid-row: span 1; }
+    }
+
+    .back-btn {
+      font-family: var(--font-body); 
+      color: #fff; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      cursor: pointer; 
+      border-bottom: 2px solid transparent; 
+      padding-bottom: 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+    .back-btn:hover {
+      border-bottom: 2px solid var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">LOVE <span>KNOTS</span></a></div>
+  <div class="menu-btn" onclick="window.location.href='index.html'">
+    <div class="back-btn">Back Home</div>
+  </div>
+</header>
+
+<div class="service-hero">
+  <img id="hero-img" src="images/sample/wedding.webp" alt="Service Hero">
+  <div class="service-hero-content">
+    <h1 class="service-title" id="service-title">Photography</h1>
+    <span class="service-subtitle" id="service-subtitle">Premium Service</span>
+  </div>
+</div>
+
+<section class="service-info-section">
+  <h3 id="service-heading">What We Do</h3>
+  <p id="service-desc">We specialize in turning your beautiful moments into cinematic timeless memories.</p>
+  
+  <div class="service-features" id="service-features">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<h2 style="text-align: center; color: #fff; font-family: var(--font-main); font-size: 3rem; margin-bottom: 50px;">Sample Gallery</h2>
+<section class="portfolio-gallery" id="portfolio-gallery">
+  <!-- Images injected by JS -->
+</section>
+
+<!-- CONTACT FOOTER -->
+<section class="contact" style="padding-bottom: 100px; background: #111;">
+  <h2 style="font-family: var(--font-main); font-size: 3rem; color: #fff; text-align: center;">Book This Service</h2>
+  <form style="display: flex; flex-direction: column; max-width: 400px; margin: 30px auto 0; gap: 15px;">
+    <input type="text" placeholder="Name" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
+    <input type="tel" placeholder="Phone Number" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
+    <textarea placeholder="Tell us about your event" rows="5" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px; resize: vertical;"></textarea>
+    <button type="submit" style="padding: 15px; background: var(--color-accent); color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;">Submit Request</button>
+  </form>
+</section>
+
+<script>
+  const serviceDetails = {
+    "Pre-Post-Wedding": {
+      title: "Pre & Post Wedding", subtitle: "Romantic Portraits",
+      desc: "Capturing the love stories before and after the big day. Our pre and post wedding shoots are relaxed sessions in stunning locations, designed to showcase your unique bond without the time pressure of the wedding ceremony.",
+      features: [
+        {title: "Creative Storytelling", desc: "Visual narratives that tell your love story in unique locations."},
+        {title: "Cinematic Aesthetics", desc: "High-end lighting and composition for every frame."},
+        {title: "Relaxed Vibe", desc: "No stress, just the two of you and our lenses."}
+      ],
+      heroImg: "images/sample/pre-wedding.webp"
+    },
+    "Engagement": {
+      title: "Engagement", subtitle: "The Beginning of Forever",
+      desc: "The moment you exchange rings is the beginning of your forever. We capture the joy, the tears, and the intimate glances shared between families and the couple.",
+      features: [
+        {title: "Candid Moments", desc: "Capturing genuine emotions as they happen naturally."},
+        {title: "Family Portraits", desc: "Beautifully composed shots of both families uniting."},
+        {title: "Detail Shots", desc: "Close-ups of rings, decor, and the ambient environment."}
+      ],
+      heroImg: "images/sample/engagement.webp"
+    },
+    "Wedding": {
+      title: "Wedding", subtitle: "Your Grand Celebration",
+      desc: "Your wedding day is a tapestry of emotions. From the quiet morning preparations to the energetic dance floor, our team works invisibly to document the full story of your biggest day.",
+      features: [
+        {title: "Full Day Coverage", desc: "From makeup to the final send-off, we miss nothing."},
+        {title: "Multi-Cam Setup", desc: "Multiple angles ensure every critical moment is covered."},
+        {title: "Premium Albums", desc: "Luxury handcrafted photobooks to preserve your memories."}
+      ],
+      heroImg: "images/sample/wedding.webp"
+    },
+    "Reception": {
+      title: "Reception", subtitle: "The Evening Gala",
+      desc: "As the sun sets and the lights come on, the reception is all about celebration and joy. We specialize in low-light cinematic photography to make your evening gala look spectacular.",
+      features: [
+        {title: "Low Light Mastery", desc: "Expert use of flashes and ambient light for crisp photos."},
+        {title: "Guest Interaction", desc: "Fun and dynamic shots of your guests enjoying the evening."},
+        {title: "Stage Portraits", desc: "Elegant and perfectly lit portraits with all your well-wishers."}
+      ],
+      heroImg: "images/sample/reception.webp"
+    },
+    "Baby Shower": {
+      title: "Baby Shower", subtitle: "A Joyous Anticipation",
+      desc: "A celebration of new life! We capture the glowing mother-to-be, the proud father, and the joy of families as they await the newest member.",
+      features: [
+        {title: "Maternity Portraits", desc: "Beautiful solo and couple shots highlighting the glow."},
+        {title: "Decor & Details", desc: "Capturing the themes, gifts, and aesthetic of the event."},
+        {title: "Family Blessings", desc: "Candid moments of elders blessing the expecting parents."}
+      ],
+      heroImg: "images/sample/baby shower.webp"
+    },
+    "Baby Shoot": {
+      title: "Baby Shoot", subtitle: "Tiny Miracles",
+      desc: "Those tiny fingers and toes grow up so fast. Our baby shoots are done with the utmost care, patience, and creativity to create adorable, timeless portraits of your little one.",
+      features: [
+        {title: "Safe Environments", desc: "Hygienic and comfortable setups for your baby."},
+        {title: "Creative Props", desc: "A variety of beautiful, safe props and themes."},
+        {title: "Patience First", desc: "We work around the baby's schedule, ensuring they are happy."}
+      ],
+      heroImg: "images/sample/baby shoot.webp"
+    },
+    "Birthday": {
+      title: "Birthday", subtitle: "Milestone Celebrations",
+      desc: "Whether it's a 1st birthday or a 50th jubilee, we bring energy and vibrance to our photography, ensuring every smile and laugh is frozen in time.",
+      features: [
+        {title: "Candid Expressions", desc: "Catching the joy of cutting the cake and unwrapping gifts."},
+        {title: "Group Dynamics", desc: "Fun, unposed shots of friends and family."},
+        {title: "Vibrant Edits", desc: "Bright and colorful processing to match the party mood."}
+      ],
+      heroImg: "images/sample/birthday 2.webp"
+    },
+    "Ear Piercing": {
+      title: "Ear Piercing", subtitle: "Traditional Milestones",
+      desc: "We respect and beautifully document your family's cultural traditions. The ear piercing ceremony is captured with a mix of candid emotion and traditional portraiture.",
+      features: [
+        {title: "Cultural Sensitivity", desc: "We understand and respect the flow of the rituals."},
+        {title: "Emotional Candids", desc: "Capturing the raw reactions of the child and parents."},
+        {title: "Ritual Details", desc: "Close-up shots of the traditional elements and offerings."}
+      ],
+      heroImg: "images/sample/ear piercing.webp"
+    },
+    "Post-Wedding": {
+      title: "Post-Wedding", subtitle: "Relaxed & Romantic",
+      desc: "The stress of the wedding is over. Now, it's just the two of you. Post-wedding shoots are incredibly romantic, relaxed, and yield some of the most beautiful intimate portraits.",
+      features: [
+        {title: "Relaxed Vibe", desc: "No time crunch, just relaxed and easy-going photography."},
+        {title: "Stunning Landscapes", desc: "We travel to epic locations for breathtaking backdrops."},
+        {title: "Outfit Flexibility", desc: "Shoot in casuals, formals, or your wedding attire again!"}
+      ],
+      heroImg: "images/sample/post wedding.webp"
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceType = urlParams.get('type') || 'Wedding';
+    
+    const data = serviceDetails[serviceType] || serviceDetails['Wedding'];
+    
+    document.title = `${data.title} Photography | Love Knots`;
+    document.getElementById('service-title').textContent = data.title;
+    document.getElementById('service-subtitle').textContent = data.subtitle;
+    document.getElementById('service-desc').textContent = data.desc;
+    document.getElementById('hero-img').src = data.heroImg;
+    
+    const featuresContainer = document.getElementById('service-features');
+    data.features.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'feature-card';
+      card.innerHTML = `<h4>${f.title}</h4><p>${f.desc}</p>`;
+      featuresContainer.appendChild(card);
+    });
+
+    // Populate Bento Grid with relevant images from clients-data.js
+    const gallery = document.getElementById('portfolio-gallery');
+    if (serviceType === 'Birthday') {
+      gallery.classList.add('birthday-bento');
+    } else if (serviceType === 'Baby Shower') {
+      gallery.classList.add('babyshower-bento');
+    }
+    
+    let matchedImages = [];
+    
+    if (typeof PORTFOLIO_CLIENTS !== 'undefined') {
+      Object.values(PORTFOLIO_CLIENTS).forEach(client => {
+        if (client.services) {
+          // Special handling for merged Pre-Post-Wedding
+          if (serviceType === 'Pre-Post-Wedding') {
+            if (client.services['Pre Wedding']) matchedImages = matchedImages.concat(client.services['Pre Wedding']);
+            if (client.services['Post Wedding']) matchedImages = matchedImages.concat(client.services['Post Wedding']);
+          } else if (client.services[serviceType]) {
+            matchedImages = matchedImages.concat(client.services[serviceType]);
+          }
+        }
+      });
+    }
+
+    // Fallback logic - IMPROVED to prevent baby images in wedding categories
+    if (matchedImages.length < 5) {
+      const weddingCategories = ['Wedding', 'Engagement', 'Reception', 'Pre-Post-Wedding', 'Post-Wedding'];
+      const babyCategories = ['Baby Shoot', 'Baby Shower', 'Birthday', 'Ear Piercing'];
+      
+      let safeCategories = [];
+      if (weddingCategories.includes(serviceType)) {
+        safeCategories = weddingCategories;
+      } else if (babyCategories.includes(serviceType)) {
+        safeCategories = babyCategories;
+      }
+
+      if (typeof PORTFOLIO_CLIENTS !== 'undefined') {
+        Object.values(PORTFOLIO_CLIENTS).forEach(client => {
+          if (client.services) {
+            Object.keys(client.services).forEach(s => {
+              if (safeCategories.includes(s) || safeCategories.length === 0) {
+                matchedImages = matchedImages.concat(client.services[s].slice(0, 2));
+              }
+            });
+          }
+        });
+      }
+    }
+    
+    // Shuffle and pick top 12 images for the bento grid
+    matchedImages = matchedImages.sort(() => 0.5 - Math.random()).slice(0, 15);
+    
+    if (matchedImages.length === 0) {
+      // Ultimate fallback if clientsData fails to load
+      matchedImages = [
+        data.heroImg, 
+        'images/sample/wedding.webp', 
+        'images/sample/engagement.webp',
+        'images/sample/reception.webp',
+        'images/sample/pre-wedding.webp'
+      ];
+    }
+
+    matchedImages.forEach((imgSrc, index) => {
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.alt = `${data.title} Sample ${index}`;
+      gallery.appendChild(img);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,627 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+:root {
+  --color-dark: #111111; /* Matching Oblo's very dark feel */
+  --color-blush: #F5D0D6;
+  --color-ivory: #FDFBF7;
+  --color-accent: #bf1e2e; /* Slightly brighter red for oblo accent */
+  
+  --font-main: 'pandora', 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: var(--color-dark);
+  color: var(--color-ivory);
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-main);
+  font-weight: bold;
+}
+
+/* ------------------- HEADER & Hamburger MENU ------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+  pointer-events: none; /* Let clicks pass through except on logo/menu */
+}
+
+.logo {
+  font-family: var(--font-main);
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+.logo span {
+  color: var(--color-accent);
+}
+
+.menu-btn {
+  width: 35px;
+  height: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1001;
+  pointer-events: auto;
+}
+
+.menu-btn .line {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin: center right;
+}
+
+.menu-btn.open .line:nth-child(1) {
+  transform: translateY(-2px) rotate(-45deg);
+  width: 35px;
+}
+.menu-btn.open .line:nth-child(2) {
+  transform: translateY(2px) rotate(45deg);
+  width: 35px;
+}
+
+/* ------------------- CINEMATIC LOADER ------------------- */
+.loader {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: var(--color-dark);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+}
+.loader.hide {
+  transform: translateY(-100vh);
+}
+.loader-center {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px;
+}
+.loader-subquote {
+  font-family: var(--font-main);
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--color-ivory);
+  opacity: 0.9;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.roller {
+  height: clamp(2rem, 5vw, 4rem);
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+.roller-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.roller-inner span {
+  height: clamp(2rem, 5vw, 4rem);
+  line-height: clamp(2rem, 5vw, 4rem);
+  display: block;
+  color: var(--color-accent);
+  font-style: italic;
+  font-weight: 700;
+}
+.loader-bottom {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  width: calc(100% - 120px);
+  z-index: 2;
+}
+.loader-counter {
+  font-family: var(--font-body);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 400;
+  color: var(--color-ivory);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+}
+.loader-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 15px;
+  position: relative;
+}
+.loader-line-progress {
+  position: absolute;
+  top: 0; left: 0; width: 0%; height: 100%;
+  background: var(--color-accent);
+}
+.loader-status {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ------------------- FULLSCREEN MENU OVERLAY ------------------- */
+.fullscreen-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(17, 17, 17, 0.98);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+.fullscreen-menu.active {
+  opacity: 1; visibility: visible;
+}
+.fullscreen-menu nav {
+  display: flex; flex-direction: column; text-align: center; gap: 30px;
+}
+.menu-link {
+  font-family: var(--font-main); font-size: 4rem; color: #fff;
+  text-decoration: none; transition: color 0.3s ease;
+}
+.menu-link:hover { color: var(--color-accent); }
+
+/* ------------------- SLIDER (PREMIUM CUT) ------------------- */
+
+.services-slider {
+  position: relative;
+  width: 100%;
+  height: 1200vh; /* 12 slides * 100vh */
+  background: #000;
+}
+
+.slider-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              visibility 1.2s, 
+              transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.slide-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+/* Gives an overall 30% overlay directly over the image */
+.slide-bg::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+.slide-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%; /* Keeps faces/center vertically stable regardless of device orientation */
+  filter: url('#liquid-glitch');
+  transform: scale(1.1) translateX(5%);
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
+}
+
+@media (min-width: 769px) {
+  .slide-bg img.align-center-desktop {
+    object-position: center center;
+  }
+}
+
+.slide.active .slide-bg img {
+  transform: scale(1.02) translateX(0);
+}
+
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 60px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.text-mask {
+  display: block;
+  overflow: hidden;
+  line-height: 1.1;
+  padding-bottom: 5px; /* give some room for descenders */
+}
+
+.text-mask span {
+  display: block;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+}
+
+.slide-subtitle {
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.slide-title {
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+/* Animations for Active Slide Text */
+.slide.active .text-mask span {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide.active .slide-subtitle .text-mask span {
+  transition-delay: 0.1s;
+}
+
+.slide.active .slide-title .text-mask span {
+  transition-delay: 0.2s;
+}
+
+/* Glitch applied via JS during slide change (Image only) */
+.slide.glitch-anim .slide-bg img {
+  filter: url('#liquid-glitch') saturate(1.2); /* Enhance the water distortion softly */
+}
+
+/* Static Elements on top of slider */
+
+.slider-arrows {
+  position: absolute;
+  right: 60px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 10;
+}
+.arrow-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 0;
+}
+.arrow-btn:hover {
+  color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+/* ------------------- OTHER SECTIONS ------------------- */
+.page-content {
+  background: var(--color-dark);
+  position: relative;
+  z-index: 5;
+}
+
+.hero {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px;
+  background: #151515;
+}
+.hero h1 { font-size: 3rem; color: #fff; }
+.hero h2 { color: var(--color-accent); font-family: var(--font-body); font-weight: 300; letter-spacing: 2px; margin-top: 10px;}
+
+.cta {
+  margin-top: 30px; padding: 15px 35px; background: var(--color-accent); color: #fff;
+  border: none; border-radius: 4px; font-family: var(--font-body); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s;
+}
+.cta:hover { background: #fff; color: var(--color-dark); }
+
+
+
+.timeline-section {
+  padding: 100px 5%;
+  background: var(--color-dark);
+  text-align: center;
+  position: relative;
+}
+.section-title {
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  color: #aaa;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: 0 auto 80px auto;
+  line-height: 1.6;
+}
+.timeline-wrap {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.timeline-wrap::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: rgba(255,255,255,0.1);
+  top: 0; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+}
+.timeline-progress {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent) 0%, #ff5266 50%, var(--color-accent) 100%);
+  background-size: 100% 150px;
+  animation: progress-sweep 1s infinite linear;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  height: 0%; 
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(191, 30, 46, 0.6);
+}
+
+@keyframes progress-sweep {
+  0% { background-position: 0 -150px; }
+  100% { background-position: 0 150px; }
+}
+.timeline-node {
+  padding: 10px 40px;
+  position: relative;
+  background: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+  z-index: 5; /* Forces the dots to render completely over the loading beam */
+}
+.timeline-node.left { left: 0; text-align: right; }
+.timeline-node.right { left: 50%; text-align: left; }
+
+.timeline-node::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--color-dark);
+  border: 4px solid rgba(255,255,255,0.2);
+  top: 15px;
+  border-radius: 50%;
+  z-index: 2;
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+.timeline-node.left::after {
+  right: 0;
+  transform: translateX(50%);
+}
+.timeline-node.right::after {
+  left: 0;
+  transform: translateX(-50%);
+}
+/* Dots 'light up' exactly as progress passes them or when active */
+.timeline-node.in-view::after {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+}
+.timeline-date {
+  font-family: var(--font-body);
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.timeline-img {
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.timeline-img img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.timeline-node:hover .timeline-img img {
+  transform: scale(1.05);
+}
+.timeline-content h3 {
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Animations Trigger Layer */
+.timeline-node.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+/* ------------------- HORIZONTAL SCROLL CLIENTS ------------------- */
+.clients-section {
+  padding: 100px 0;
+  background: var(--color-dark);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.clients-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  padding: 20px 0 60px 0;
+}
+
+.clients-scroll-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.clients-scroll-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  padding: 0 5vw;
+}
+
+.client-card {
+  width: 300px;
+  height: 450px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transform: scale(0.95);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: #1a1a1a;
+}
+
+.client-card:hover {
+  transform: scale(1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.client-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.client-card:hover img {
+  transform: scale(1.05);
+}
+
+.client-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  text-align: left;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.client-card:hover .client-card-overlay {
+  transform: translateY(0);
+}
+
+.client-card-name {
+  color: #fff;
+  font-family: var(--font-main);
+  font-size: 1.8rem;
+  margin: 0 0 5px 0;
+}
+
+.client-card-service {
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  /* Disable glitch on mobile */
+  .slide-bg img { filter: none !important; }
+  .slide.glitch-anim .slide-bg img { filter: none !important; }
+  
+  .site-header { padding: 20px 30px; }
+  .slide-content, .slider-arrows { left: 30px; }
+  .slider-arrows { right: 30px; bottom: 30px; }
+  
+  .timeline-wrap::before { left: 40px; transform: translateX(-50%); }
+  .timeline-progress { left: 40px; transform: translateX(-50%); }
+  .timeline-node { width: 100%; padding-left: 80px; padding-right: 25px; text-align: left; }
+  .timeline-node.left, .timeline-node.right { left: 0; }
+  .timeline-node.left::after, .timeline-node.right::after { 
+    left: 40px; 
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  /* Mobile Scaling to fix Text Overlaps */
+  .section-title { font-size: 2.2rem; margin-bottom: 10px; }
+}

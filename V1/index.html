@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Photography - Love Knots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- CINEMATIC LOADING SCREEN -->
+<div id="loader" class="loader">
+  <div class="loader-center">
+    <h2 class="loader-subquote">
+      We capture 
+      <div class="roller">
+        <div class="roller-inner">
+          <span>Weddings</span>
+          <span>Engagements</span>
+          <span>Baby Showers</span>
+          <span>Birthdays</span>
+        </div>
+      </div>
+    </h2>
+  </div>
+  
+  <div class="loader-bottom">
+    <div class="loader-counter" id="loader-counter">000</div>
+    <div class="loader-divider">
+      <div class="loader-line-progress" id="loader-line-progress"></div>
+    </div>
+    <div class="loader-status">LOVEKNOTS.IN</div>
+  </div>
+</div>
+
+
+<!-- MENU HEADER -->
+<header class="site-header">
+  <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">LOVE <span>KNOTS</span></a></div>
+  <div class="menu-btn" id="menu-btn">
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- FULL SCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreen-menu">
+  <nav>
+    <a href="#about" class="menu-link">About</a>
+  </nav>
+</div>
+
+<!-- SERVICES SLIDER (PREMIUM OBLO EFFECT) -->
+<section class="services-slider" id="services">
+  <div class="slider-sticky">
+    <div id="slider-container" class="slider-container">
+    
+    <div class="slide active" onclick="window.location.href='service.html?type=Pre-Post-Wedding'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/pre-wedding.webp" alt="Pre-Wedding" class="align-center-desktop">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>PHOTOGRAPHY</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Pre & Post Wedding</span></span></h2>
+      </div>
+    </div>
+    
+    <div class="slide" onclick="window.location.href='service.html?type=Engagement'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/engagement.webp" alt="Engagement">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>PHOTOGRAPHY</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Engagement</span></span></h2>
+      </div>
+    </div>
+    
+    <div class="slide" onclick="window.location.href='service.html?type=Wedding'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/wedding.webp" alt="Wedding">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>SERVICES</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Wedding</span></span></h2>
+      </div>
+    </div>
+
+    <div class="slide" onclick="window.location.href='service.html?type=Reception'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/reception.webp" alt="Reception">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>SERVICES</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Reception</span></span></h2>
+      </div>
+    </div>
+
+    <div class="slide" onclick="window.location.href='service.html?type=Baby%20Shower'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/baby%20shower.webp" alt="Baby Shower" class="align-center-desktop">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>EVENTS</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Baby Shower</span></span></h2>
+      </div>
+    </div>
+
+    <div class="slide" onclick="window.location.href='service.html?type=Ear%20Piercing'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/ear%20piercing.webp" alt="Ear Piercing">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>EVENTS</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Ear Piercing</span></span></h2>
+      </div>
+    </div>
+
+    <div class="slide" onclick="window.location.href='service.html?type=Baby%20Shoot'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/baby%20shoot.webp" alt="Baby Photoshoot">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>PORTRAITS</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Baby Shoot</span></span></h2>
+      </div>
+    </div>
+
+    <div class="slide" onclick="window.location.href='service.html?type=Birthday'" style="cursor: pointer;">
+      <div class="slide-bg">
+        <img src="images/sample/birthday%202.webp" alt="Birthday Event">
+      </div>
+      <div class="slide-content">
+        <span class="slide-subtitle"><span class="text-mask"><span>EVENTS</span></span></span>
+        <h2 class="slide-title"><span class="text-mask"><span>Birthday</span></span></h2>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <div class="slider-arrows">
+    <button id="prev-slide" class="arrow-btn" aria-label="Previous">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+    <button id="next-slide" class="arrow-btn" aria-label="Next">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+    </button>
+  </div>
+  </div>
+</section>
+
+<!-- OTHER SECTIONS -->
+<div class="page-content">
+
+  <!-- ABOUT -->
+  <section class="hero" id="about" style="display: none;">
+    <button class="cta">Check Availability</button>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section" id="journey">
+    <h2 class="section-title">A Lifelong Bond</h2>
+    <p class="section-subtitle">We don't just work with you once. We build a bond that makes you invite us back to capture every beautiful milestone of your family's journey.</p>
+    <div class="timeline-wrap">
+      <div class="timeline-progress" id="timeline-progress"></div>
+      
+      <div class="timeline-node left">
+        <div class="timeline-date">JAN 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/pre-wedding.webp" alt="Pre-Wedding"></div>
+          <h3>Pre-Wedding</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node right">
+        <div class="timeline-date">APR 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/engagement.webp" alt="Engagement"></div>
+          <h3>Engagement</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node left">
+        <div class="timeline-date">SEP 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/wedding.webp" alt="Wedding"></div>
+          <h3>Wedding</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node right">
+        <div class="timeline-date">SEP 2021</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/reception.webp" alt="Reception"></div>
+          <h3>Reception</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node left">
+        <div class="timeline-date">AUG 2022</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/baby%20shower.webp" alt="Baby Shower"></div>
+          <h3>Baby Shower</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node right">
+        <div class="timeline-date">NOV 2022</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/baby%20shoot.webp" alt="Baby Shoot"></div>
+          <h3>Baby Shoot</h3>
+        </div>
+      </div>
+
+      <div class="timeline-node left">
+        <div class="timeline-date">JAN 2023</div>
+        <div class="timeline-content">
+          <div class="timeline-img"><img src="images/sample/ear%20piercing.webp" alt="Ear Piercing"></div>
+          <h3>Ear Piercing</h3>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CLIENTS PORTFOLIO (HORIZONTAL SCROLL) -->
+  <section class="clients-section" id="clients">
+    <h2 class="section-title">Our Beloved Clients</h2>
+    <p class="section-subtitle">A glimpse into the magical moments we've captured for beautiful families.</p>
+    
+    <div class="clients-scroll-container">
+      <div class="clients-scroll-track" id="clients-track">
+        <!-- Client cards generated by JS -->
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="clients-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

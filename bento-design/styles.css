@@ -1,0 +1,67 @@
+:root{
+      --primary-color: #e1e1e1;
+      --secondary-color: #161616;
+      --tertiary-color: #555;
+      --quaternary-color: #888;
+      --quinary-color: #ccc;
+      --senary-color: #eee;
+      --septenary-color: #ddd;
+      --octonary-color: #fff;
+      --nonary-color: #000;
+      --decary-color: #222;
+      /* background-color: #161616; */
+}  
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cols = 2 gaps of 8px = 16px */
+    grid-auto-rows: calc(((100cqw - 16px) / 3) * 16 / 9);
+    grid-auto-flow: dense;
+    gap: 8px;
+    container-type: inline-size;
+  }
+  .item {
+    background-color: #161616;
+    color: #e1e1e1;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+    overflow: hidden;
+  }
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
+  
+  /* Reset all items to auto placement initially */
+  .item[class*="item-"] {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  
+  /* Mobile Bento Layout (using 2x2 blocks to perfectly maintain 9:16 shape) */
+  .item-0 { grid-column: span 2; grid-row: span 2; }
+  .item-7 { grid-column: span 2; grid-row: span 2; }
+  
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(6, 1fr);
+      /* 6 cols = 5 gaps of 8px = 40px */
+      grid-auto-rows: calc(((100cqw - 40px) / 6) * 16 / 9);
+    }
+    .mobile-only {
+      display: none;
+    }
+    .desktop-only {
+      display: block;
+    }
+    
+    /* Desktop Bento Layout (using 2x2 blocks to perfectly maintain 9:16 shape) */
+    .item-0 { grid-column: span 2; grid-row: span 2; }
+    .item-3 { grid-column: span 2; grid-row: span 2; }
+    .item-7 { grid-column: span 2; grid-row: span 2; }
+    .item-8 { grid-column: span 2; grid-row: span 2; }
+  }

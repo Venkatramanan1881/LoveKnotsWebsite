@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client Portfolio | Love Knots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="clients-data.js"></script>
+  <style>
+    body { background: #111; overflow-x: hidden; }
+    
+    .portfolio-hero {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+    .portfolio-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .portfolio-hero-overlay {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(to top, rgba(17,17,17,1) 0%, rgba(17,17,17,0) 100%);
+      padding: 15vh 5vw 40px;
+    }
+    .portfolio-title {
+      font-family: var(--font-main);
+      font-size: clamp(3rem, 8vw, 7rem);
+      color: #fff;
+      margin: 0 0 10px 0;
+      line-height: 1;
+    }
+    .portfolio-meta {
+      font-family: var(--font-body);
+      color: var(--color-accent);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .portfolio-details-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding: 100px 5vw;
+      background: #111;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      width: 100%;
+    }
+    
+    .detail-item h4 {
+      font-family: var(--font-body);
+      color: var(--color-accent);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0 0 5px 0;
+    }
+    .detail-item p {
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .portfolio-gallery {
+      padding: 0 5vw 100px;
+      background: #111;
+      column-count: 1; /* Mobile default */
+      column-gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .portfolio-gallery img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      break-inside: avoid;
+    }
+    
+    .portfolio-gallery img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    /* Mobile Aspect Ratios (Only 3:4 and 9:16, no square) */
+    .portfolio-gallery img:nth-child(even) { aspect-ratio: 3 / 4; }
+    .portfolio-gallery img:nth-child(odd) { aspect-ratio: 9 / 16; }
+    
+    @media (min-width: 768px) {
+      .portfolio-gallery {
+        column-count: 3;
+      }
+      /* Desktop Aspect Ratios (Square, 3:4, 9:16) */
+      .portfolio-gallery img:nth-child(4n+1) { aspect-ratio: 9 / 16; }
+      .portfolio-gallery img:nth-child(4n+2) { aspect-ratio: 1 / 1; }
+      .portfolio-gallery img:nth-child(4n+3) { aspect-ratio: 3 / 4; }
+      .portfolio-gallery img:nth-child(4n+4) { aspect-ratio: 1 / 1; }
+    }
+    
+    .portfolio-testimonial {
+      padding: 0 5vw 100px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .portfolio-testimonial blockquote {
+      font-family: var(--font-main);
+      font-size: clamp(1.5rem, 3vw, 2.8rem);
+      color: #fff;
+      margin: 0;
+      line-height: 1.4;
+      font-style: italic;
+    }
+    .portfolio-testimonial cite {
+      display: block;
+      margin-top: 30px;
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .back-btn {
+      font-family: var(--font-body); 
+      color: #fff; 
+      text-transform: uppercase; 
+      letter-spacing: 2px; 
+      cursor: pointer; 
+      border-bottom: 2px solid transparent; 
+      padding-bottom: 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+    .back-btn:hover {
+      border-bottom: 2px solid var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" style="mix-blend-mode: difference;">
+  <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">LOVE <span>KNOTS</span></a></div>
+  <div class="menu-btn" onclick="window.location.href='index.html'">
+    <div class="back-btn">Back Home</div>
+  </div>
+</header>
+
+<div class="portfolio-hero">
+  <img id="hero-img" src="" alt="Hero Image">
+  <div class="portfolio-hero-overlay">
+    <h1 class="portfolio-title" id="hero-title">Client Name</h1>
+    <span class="portfolio-meta" id="hero-subtitle">Service</span>
+  </div>
+</div>
+
+<section class="portfolio-details-section">
+  <div class="details-grid">
+    <div class="detail-item">
+      <h4>Location</h4>
+      <p id="detail-place">-</p>
+    </div>
+    <div class="detail-item">
+      <h4>Date Delivered</h4>
+      <p id="detail-time">-</p>
+    </div>
+    <div class="detail-item">
+      <h4>Services Offered</h4>
+      <p id="detail-service">-</p>
+    </div>
+    <div class="detail-item">
+      <h4>Client Rating</h4>
+      <p id="detail-rating">⭐ 5.0 / 5.0</p>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio-gallery" id="portfolio-gallery">
+  <!-- Images injected by JS -->
+</section>
+
+<section class="portfolio-testimonial">
+  <blockquote id="client-review">
+    "Love Knots beautifully captured our memories. Pure elegance."
+  </blockquote>
+  <cite id="client-cite">— Client Name</cite>
+</section>
+
+<!-- CONTACT FOOTER -->
+<section class="contact" style="padding-bottom: 100px; background: #111;">
+  <h2 style="font-family: var(--font-main); font-size: 3rem; color: #fff; text-align: center;">Ready to Capture Your Moments?</h2>
+  <form style="display: flex; flex-direction: column; max-width: 400px; margin: 30px auto 0; gap: 15px;">
+    <input type="text" placeholder="Name" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
+    <input type="tel" placeholder="Phone Number" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
+    <textarea placeholder="Tell us about your event" rows="5" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px; resize: vertical;"></textarea>
+    <button type="submit" style="padding: 15px; background: var(--color-accent); color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;">Submit Request</button>
+  </form>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get('id');
+    
+    if (clientId && PORTFOLIO_CLIENTS[clientId]) {
+      const data = PORTFOLIO_CLIENTS[clientId];
+      
+      document.title = `${data.name} | Love Knots`;
+      document.getElementById('hero-img').src = Object.values(data.services)[0][0] || '';
+      document.getElementById('hero-title').textContent = data.name;
+      document.getElementById('hero-subtitle').textContent = data.primary_service;
+      
+      document.getElementById('detail-place').textContent = data.place;
+      document.getElementById('detail-time').textContent = data.time;
+      document.getElementById('detail-service').textContent = data.primary_service;
+      document.getElementById('detail-rating').textContent = `⭐ ${data.rating} / 5.0`;
+      
+      document.getElementById('client-review').textContent = `"${data.review}"`;
+      document.getElementById('client-cite').textContent = `— ${data.name}`;
+      
+      const gallery = document.getElementById('portfolio-gallery');
+      
+      // Flatten all images across all services for this client
+      let allImages = [];
+      Object.values(data.services).forEach(imgs => {
+        allImages = allImages.concat(imgs);
+      });
+      
+      allImages.forEach((imgSrc, index) => {
+        if (index === 0) return; // Skip cover image
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.alt = `${data.name} photo ${index}`;
+        gallery.appendChild(img);
+      });
+    } else {
+      document.getElementById('hero-title').textContent = "Client Not Found";
+    }
+  });
+</script>
+</body>
+</html>
