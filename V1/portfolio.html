@@ -3,189 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reshma & Martin | Love Knots</title>
+  <title>Portfolio - Love Knots</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    body { background: #111; overflow-x: hidden; }
-    
-    /* Specific overrides for single portfolio page */
-    .portfolio-hero {
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-    }
-    .portfolio-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .portfolio-hero-overlay {
-      position: absolute;
-      bottom: 0; left: 0; width: 100%;
-      background: linear-gradient(to top, rgba(17,17,17,1) 0%, rgba(17,17,17,0) 100%);
-      padding: 15vh 5vw 40px;
-    }
-    .portfolio-title {
-      font-family: var(--font-main);
-      font-size: clamp(3rem, 8vw, 7rem);
-      color: #fff;
-      margin: 0 0 10px 0;
-      line-height: 1;
-    }
-    .portfolio-meta {
-      font-family: var(--font-body);
-      color: var(--color-accent);
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .portfolio-details-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 50px;
-      padding: 100px 5vw;
-      background: #111;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .portfolio-info {
-      flex: 1 1 300px;
-    }
-    .portfolio-info h4 {
-      font-family: var(--font-body);
-      color: var(--color-accent);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin: 0 0 5px 0;
-    }
-    .portfolio-info p {
-      color: #fff;
-      font-family: var(--font-body);
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-    }
-    .portfolio-testimonial {
-      flex: 2 1 600px;
-    }
-    .portfolio-testimonial blockquote {
-      font-family: var(--font-main);
-      font-size: clamp(1.5rem, 3vw, 2.8rem);
-      color: #fff;
-      margin: 0;
-      line-height: 1.4;
-      font-style: italic;
-    }
-    .portfolio-testimonial cite {
-      display: block;
-      margin-top: 30px;
-      color: var(--color-accent);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .portfolio-gallery {
-      padding: 0 5vw 100px;
-      background: #111;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .portfolio-gallery img {
-      width: 100%;
-      border-radius: 8px;
-      height: auto;
-    }
-    
-    @media (min-width: 768px) {
-      .portfolio-gallery {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-      .portfolio-gallery img:nth-child(1) { grid-column: 1 / -1; }
-    }
-    
-    .back-btn {
-      font-family: var(--font-body); 
-      color: #fff; 
-      text-transform: uppercase; 
-      letter-spacing: 2px; 
-      cursor: pointer; 
-      border-bottom: 2px solid transparent; 
-      padding-bottom: 5px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: 0.3s ease;
-    }
-    .back-btn:hover {
-      border-bottom: 2px solid var(--color-accent);
-    }
-  </style>
 </head>
-<body>
+<body class="portfolio-page">
 
-<!-- HEADER -->
-<header class="site-header" style="mix-blend-mode: difference;">
-  <div class="logo"><a href="index.html"><img src="Logo/Love%20knots%20logo.png" alt="Love Knots Logo" style="height: 40px; object-fit: contain; vertical-align: middle;"></a></div>
-  <div class="menu-btn" onclick="window.location.href='index.html'">
-    <div class="back-btn">Back Home</div>
+<!-- CUSTOM CLICK CURSOR -->
+<div id="click-cursor" class="click-cursor">Click</div>
+
+<!-- MENU HEADER -->
+<header class="site-header">
+  <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">LOVE <span>KNOTS</span></a></div>
+  <div class="menu-btn" id="menu-btn">
+    <div class="line"></div>
+    <div class="line"></div>
   </div>
 </header>
 
-<div class="portfolio-hero">
-  <img src="images/Reshma%20-%20Martin%20-01.png" alt="Reshma and Martin">
-  <div class="portfolio-hero-overlay">
-    <h1 class="portfolio-title">Reshma & Martin</h1>
-    <span class="portfolio-meta">Happy Couple</span>
-  </div>
+<!-- FULL SCREEN MENU -->
+<div class="fullscreen-menu" id="fullscreen-menu">
+  <nav>
+    <a href="index.html" class="menu-link">Home</a>
+    <a href="about.html" class="menu-link">About Us</a>
+    <a href="portfolio.html" class="menu-link">Services</a>
+    <a href="portfolio.html" class="menu-link">Portfolio</a>
+    <a href="index.html#contact" class="menu-link">Contact</a>
+  </nav>
 </div>
 
-<section class="portfolio-details-section">
-  <div class="portfolio-info">
-    <h4>Client</h4>
-    <p>Reshma & Martin</p>
-    
-    <h4>Event Category</h4>
-    <p>Wedding Ceremony & Reception</p>
-    
-    <h4>Date</h4>
-    <p>April, 2025</p>
+<main>
+  <section class="portfolio-main-section">
+    <div class="container" style="max-width: 1400px; margin: 0 auto;">
+      <div class="section-header" style="margin-bottom: 40px; text-align: center;">
+        <span class="slide-subtitle">OUR SERVICES</span>
+        <h2 class="section-title">The Art of Celebration</h2>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Item 1: Pre & Post Wedding (Large Portrait) -->
+        <div class="bento-item l" onclick="window.location.href='service.html?type=Pre-Post-Wedding'">
+          <img src="images/sample/pre-wedding.webp" alt="Pre & Post Wedding">
+          <div class="bento-overlay">
+            <span class="bento-category">Photography</span>
+            <h3 class="bento-title">Pre & Post Wedding</h3>
+          </div>
+        </div>
+
+        <!-- Item 2: Engagement (Tall 9:16) -->
+        <div class="bento-item t" onclick="window.location.href='service.html?type=Engagement'">
+          <img src="images/sample/engagement.webp" alt="Engagement">
+          <div class="bento-overlay">
+            <span class="bento-category">Photography</span>
+            <h3 class="bento-title">Engagement</h3>
+          </div>
+        </div>
+
+        <!-- Item 3: Wedding (Tall 9:16) -->
+        <div class="bento-item t" onclick="window.location.href='service.html?type=Wedding'">
+          <img src="images/sample/wedding.webp" alt="Wedding">
+          <div class="bento-overlay">
+            <span class="bento-category">Services</span>
+            <h3 class="bento-title">Wedding</h3>
+          </div>
+        </div>
+
+        <!-- Item 4: Reception (Wide/Square) -->
+        <div class="bento-item w" onclick="window.location.href='service.html?type=Reception'">
+          <img src="images/sample/reception.webp" alt="Reception">
+          <div class="bento-overlay">
+            <span class="bento-category">Services</span>
+            <h3 class="bento-title">Reception</h3>
+          </div>
+        </div>
+
+        <!-- Item 5: Baby Shower (Small Portrait) -->
+        <div class="bento-item s" onclick="window.location.href='service.html?type=Baby%20Shower'">
+          <img src="images/sample/baby%20shower.webp" alt="Baby Shower">
+          <div class="bento-overlay">
+            <span class="bento-category">Events</span>
+            <h3 class="bento-title">Baby Shower</h3>
+          </div>
+        </div>
+
+        <!-- Item 6: Birthday (Small Portrait) -->
+        <div class="bento-item s" onclick="window.location.href='service.html?type=Birthday'">
+          <img src="images/sample/birthday%202.webp" alt="Birthday">
+          <div class="bento-overlay">
+            <span class="bento-category">Events</span>
+            <h3 class="bento-title">Birthday</h3>
+          </div>
+        </div>
+
+        <!-- Item 7: Baby Shoot (Wide/Square) -->
+        <div class="bento-item w" onclick="window.location.href='service.html?type=Baby%20Shoot'">
+          <img src="images/sample/baby%20shoot.webp" alt="Baby Shoot">
+          <div class="bento-overlay">
+            <span class="bento-category">Portraits</span>
+            <h3 class="bento-title">Baby Shoot</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-logo">LOVE <span>KNOTS</span></div>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+  </nav>
+  <div class="footer-bottom">
+    &copy; 2024 LOVE KNOTS. ALL RIGHTS RESERVED.
   </div>
-  <div class="portfolio-testimonial">
-    <blockquote>
-      "Love Knots captured the pure emotion and breathtaking beauty of our union perfectly. It wasn't just a photoshoot, it was a perfectly crafted cinematic experience of our eternal bond that we will cherish for our entire lives."
-    </blockquote>
-    <cite>— Reshma & Martin</cite>
-  </div>
-</section>
+</footer>
 
-<section class="portfolio-gallery">
-  <img src="images/Reshma%20-%20Martin%20-02.png" alt="Reshma and Martin Wedding Photo 2">
-  <img src="images/Reshma%20-%20Martin%20-03.png" alt="Reshma and Martin Wedding Photo 3">
-  <img src="images/Reshma%20-%20Martin%20-04.png" alt="Reshma and Martin Wedding Photo 4">
-  <img src="images/Reshma%20-%20Martin%20-05.png" alt="Reshma and Martin Wedding Photo 5">
-  <img src="images/Reshma%20-%20Martin%20-06.png" alt="Reshma and Martin Wedding Photo 6">
-</section>
-
-<!-- CONTACT FOOTER (From Main Page) -->
-<section class="contact" style="padding-bottom: 50px; background: #111;">
-  <h2 style="font-family: var(--font-main); font-size: 3rem; color: #fff; text-align: center;">Contact Us</h2>
-  <form style="display: flex; flex-direction: column; max-width: 400px; margin: 30px auto 0; gap: 15px;">
-    <input type="text" placeholder="Name" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
-    <input type="tel" placeholder="Phone Number" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px;" />
-    <textarea placeholder="Comments" rows="5" required style="padding: 15px; border: 1px solid #333; background: transparent; color: #fff; border-radius: 4px; resize: vertical;"></textarea>
-    <button type="submit" style="padding: 15px; background: #bf1e2e; color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;">Submit</button>
-  </form>
-</section>
-
+<script src="script.js"></script>
 </body>
 </html>

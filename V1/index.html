@@ -11,19 +11,23 @@
 </head>
 <body>
 
+<!-- CUSTOM CLICK CURSOR -->
+<div id="click-cursor" class="click-cursor">Click</div>
+
 <!-- CINEMATIC LOADING SCREEN -->
 <div id="loader" class="loader">
   <div class="loader-center">
     <h2 class="loader-subquote">
-      We capture 
+      <span>We capture</span>
       <div class="roller">
         <div class="roller-inner">
-          <span>Weddings</span>
+          <span class="active">Weddings</span>
           <span>Engagements</span>
           <span>Baby Showers</span>
           <span>Birthdays</span>
         </div>
       </div>
+      <span>Moments</span>
     </h2>
   </div>
   
@@ -49,7 +53,11 @@
 <!-- FULL SCREEN MENU -->
 <div class="fullscreen-menu" id="fullscreen-menu">
   <nav>
-    <a href="#about" class="menu-link">About</a>
+    <a href="index.html" class="menu-link">Home</a>
+    <a href="about.html" class="menu-link">About Us</a>
+    <a href="portfolio.html" class="menu-link">Services</a>
+    <a href="portfolio.html" class="menu-link">Portfolio</a>
+    <a href="#contact" class="menu-link">Contact</a>
   </nav>
 </div>
 
@@ -58,7 +66,7 @@
   <div class="slider-sticky">
     <div id="slider-container" class="slider-container">
     
-    <div class="slide active" onclick="window.location.href='service.html?type=Pre-Post-Wedding'" style="cursor: pointer;">
+    <div class="slide active" data-href="service.html?type=Pre-Post-Wedding">
       <div class="slide-bg">
         <img src="images/sample/pre-wedding.webp" alt="Pre-Wedding" class="align-center-desktop">
       </div>
@@ -68,7 +76,7 @@
       </div>
     </div>
     
-    <div class="slide" onclick="window.location.href='service.html?type=Engagement'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Engagement">
       <div class="slide-bg">
         <img src="images/sample/engagement.webp" alt="Engagement">
       </div>
@@ -78,7 +86,7 @@
       </div>
     </div>
     
-    <div class="slide" onclick="window.location.href='service.html?type=Wedding'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Wedding">
       <div class="slide-bg">
         <img src="images/sample/wedding.webp" alt="Wedding">
       </div>
@@ -88,7 +96,7 @@
       </div>
     </div>
 
-    <div class="slide" onclick="window.location.href='service.html?type=Reception'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Reception">
       <div class="slide-bg">
         <img src="images/sample/reception.webp" alt="Reception">
       </div>
@@ -98,7 +106,7 @@
       </div>
     </div>
 
-    <div class="slide" onclick="window.location.href='service.html?type=Baby%20Shower'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Baby%20Shower">
       <div class="slide-bg">
         <img src="images/sample/baby%20shower.webp" alt="Baby Shower" class="align-center-desktop">
       </div>
@@ -108,7 +116,7 @@
       </div>
     </div>
 
-    <div class="slide" onclick="window.location.href='service.html?type=Ear%20Piercing'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Ear%20Piercing">
       <div class="slide-bg">
         <img src="images/sample/ear%20piercing.webp" alt="Ear Piercing">
       </div>
@@ -118,7 +126,7 @@
       </div>
     </div>
 
-    <div class="slide" onclick="window.location.href='service.html?type=Baby%20Shoot'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Baby%20Shoot">
       <div class="slide-bg">
         <img src="images/sample/baby%20shoot.webp" alt="Baby Photoshoot">
       </div>
@@ -128,7 +136,7 @@
       </div>
     </div>
 
-    <div class="slide" onclick="window.location.href='service.html?type=Birthday'" style="cursor: pointer;">
+    <div class="slide" data-href="service.html?type=Birthday">
       <div class="slide-bg">
         <img src="images/sample/birthday%202.webp" alt="Birthday Event">
       </div>
@@ -168,7 +176,7 @@
       <div class="timeline-progress" id="timeline-progress"></div>
       
       <div class="timeline-node left">
-        <div class="timeline-date">JAN 2021</div>
+        <!-- <div class="timeline-date">JAN 2021</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/pre-wedding.webp" alt="Pre-Wedding"></div>
           <h3>Pre-Wedding</h3>
@@ -176,7 +184,7 @@
       </div>
 
       <div class="timeline-node right">
-        <div class="timeline-date">APR 2021</div>
+        <!-- <div class="timeline-date">APR 2021</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/engagement.webp" alt="Engagement"></div>
           <h3>Engagement</h3>
@@ -184,7 +192,7 @@
       </div>
 
       <div class="timeline-node left">
-        <div class="timeline-date">SEP 2021</div>
+        <!-- <div class="timeline-date">SEP 2021</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/wedding.webp" alt="Wedding"></div>
           <h3>Wedding</h3>
@@ -192,7 +200,7 @@
       </div>
 
       <div class="timeline-node right">
-        <div class="timeline-date">SEP 2021</div>
+        <!-- <div class="timeline-date">SEP 2021</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/reception.webp" alt="Reception"></div>
           <h3>Reception</h3>
@@ -200,7 +208,7 @@
       </div>
 
       <div class="timeline-node left">
-        <div class="timeline-date">AUG 2022</div>
+        <!-- <div class="timeline-date">AUG 2022</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/baby%20shower.webp" alt="Baby Shower"></div>
           <h3>Baby Shower</h3>
@@ -208,7 +216,7 @@
       </div>
 
       <div class="timeline-node right">
-        <div class="timeline-date">NOV 2022</div>
+        <!-- <div class="timeline-date">NOV 2022</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/baby%20shoot.webp" alt="Baby Shoot"></div>
           <h3>Baby Shoot</h3>
@@ -216,7 +224,7 @@
       </div>
 
       <div class="timeline-node left">
-        <div class="timeline-date">JAN 2023</div>
+        <!-- <div class="timeline-date">JAN 2023</div> -->
         <div class="timeline-content">
           <div class="timeline-img"><img src="images/sample/ear%20piercing.webp" alt="Ear Piercing"></div>
           <h3>Ear Piercing</h3>
@@ -228,18 +236,63 @@
 
   <!-- CLIENTS PORTFOLIO (HORIZONTAL SCROLL) -->
   <section class="clients-section" id="clients">
-    <h2 class="section-title">Our Beloved Clients</h2>
-    <p class="section-subtitle">A glimpse into the magical moments we've captured for beautiful families.</p>
-    
-    <div class="clients-scroll-container">
-      <div class="clients-scroll-track" id="clients-track">
-        <!-- Client cards generated by JS -->
+    <div class="clients-sticky">
+      <div class="section-header">
+        <div class="header-text">
+          <h2 class="section-title">Our Beloved Clients</h2>
+          <p class="section-subtitle">A glimpse into the magical moments we've captured for beautiful families.</p>
+        </div>
       </div>
+      
+      <div class="clients-scroll-container">
+        <div class="clients-scroll-track" id="clients-track">
+          <!-- Client cards generated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-subtitle">Have a date in mind? We'd love to discuss how we can make your memories eternal.</p>
+      
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="YOUR NAME" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="EMAIL ADDRESS" required>
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="EVENT TYPE (e.g. Wedding)" required>
+        </div>
+        <div class="form-group">
+          <input type="date" placeholder="EVENT DATE" required>
+        </div>
+        <div class="form-group full-width">
+          <textarea placeholder="TELL US MORE ABOUT YOUR VISION"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
     </div>
   </section>
 
 </div>
 
+<footer class="site-footer">
+  <div class="footer-logo">LOVE <span>KNOTS</span></div>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="footer-bottom">
+    &copy; 2026 LOVE KNOTS. ALL RIGHTS RESERVED.
+  </div>
+</footer>
 <script src="clients-data.js"></script>
 <script src="script.js"></script>
 </body>
